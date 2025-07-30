@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Uzair Kashif - Full Stack Developer specializing in MERN stack, AI/ML, and modern web technologies. View my portfolio of innovative projects and technical expertise."
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>Uzair Kashif - Full Stack Developer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              primary: '#0D0D2B',
+              secondary: '#3671E9',
+              accent: '#EB255A',
+              neutral: {
+                100: '#FFFFFF',
+                200: '#F2F2F2',
+                300: '#E0E0E0',
+                400: '#BDBDBD',
+                500: '#828282',
+                600: '#4F4F4F',
+                700: '#333333',
+                800: '#1A1A1A',
+                900: '#0D0D0D',
+              }
+            },
+            fontFamily: {
+              'sans': ['"Clash Display"', 'system-ui', 'sans-serif'],
+              'mono': ['"Space Mono"', 'monospace'],
+            },
+            animation: {
+              'gradient-pan': 'gradient-pan 6s ease-in-out infinite',
+              'text-focus-in': 'text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both',
+              'slide-in-blurred-left': 'slide-in-blurred-left 0.9s cubic-bezier(0.230, 1.000, 0.320, 1.000) both',
+            },
+            keyframes: {
+              'gradient-pan': {
+                '0%': { backgroundPosition: '0% 50%' },
+                '50%': { backgroundPosition: '100% 50%' },
+                '100%': { backgroundPosition: '0% 50%' },
+              },
+              'text-focus-in': {
+                '0%': { filter: 'blur(12px)', opacity: '0' },
+                '100%': { filter: 'blur(0px)', opacity: '1' },
+              },
+              'slide-in-blurred-left': {
+                '0%': {
+                  transform: 'translateX(-1000px) scaleX(2.5) scaleY(0.2)',
+                  transformOrigin: '100% 50%',
+                  filter: 'blur(40px)',
+                  opacity: '0',
+                },
+                '100%': {
+                  transform: 'translateX(0) scaleY(1) scaleX(1)',
+                  transformOrigin: '50% 50%',
+                  filter: 'blur(0)',
+                  opacity: '1',
+                },
+              },
+            },
+          },
+        },
+      }
+    </script>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>
