@@ -49,7 +49,7 @@ export const projects: Project[] = [
     ],
     technologies: ['React', 'Node.js', 'Express.js', 'MongoDB', 'REST API'],
     category: 'fullstack',
-    demoUrl: '',
+    demoUrl: 'https://fulls-todo-list.onrender.com',
     githubUrl: 'https://github.com/Ukzzz/Todo-App.git',
     featured: false,
     completedAt: '2023-11-20'
