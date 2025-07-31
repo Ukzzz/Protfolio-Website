@@ -67,7 +67,7 @@ export const projects: Project[] = [
     ],
     technologies: ['OpenWeatherMap API', 'HTML', 'CSS', 'Node.js', 'Express'],
     category: 'backend',
-    demoUrl: '',
+    demoUrl: 'https://weather-forcast-vept.onrender.com',
     githubUrl: 'https://github.com/Ukzzz/Weather-Forcast-',
     featured: true,
     completedAt: '2023-09-10'
