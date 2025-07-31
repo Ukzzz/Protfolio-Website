@@ -50,7 +50,7 @@ export const projects: Project[] = [
     technologies: ['React', 'Node.js', 'Express.js', 'MongoDB', 'REST API'],
     category: 'fullstack',
     demoUrl: '',
-    githubUrl: 'https://github.com/Ukzzz/Todo-List-React-Nodejs-',
+    githubUrl: 'https://github.com/Ukzzz/Todo-App.git',
     featured: false,
     completedAt: '2023-11-20'
   },
