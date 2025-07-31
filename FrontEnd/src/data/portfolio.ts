@@ -104,7 +104,7 @@ export const projects: Project[] = [
     ],
     technologies: ['Express.js', 'MongoDB', 'JWT', 'bcrypt', 'EJS'],
     category: 'backend',
-    demoUrl: '',
+    demoUrl: 'https://blog-website-8gm4.onrender.com',
     githubUrl: 'https://github.com/Ukzzz/Blog-Website-',
     featured: true,
     completedAt: '2023-08-15'
