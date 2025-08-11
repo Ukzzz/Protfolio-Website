@@ -174,7 +174,7 @@ const Hero: React.FC = () => {
 
           {/* Stats Section */}
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto mb-16"
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto mb-16 place-items-center"
             variants={itemVariants}
           >
             <div className="text-center">
