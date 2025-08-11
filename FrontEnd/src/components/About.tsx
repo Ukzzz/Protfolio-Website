@@ -186,7 +186,7 @@ const About: React.FC = () => {
             className="mt-24"
             variants={itemVariants}
           >
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 place-items-center">
               {stats.map((stat, index) => (
                 <motion.div
                   key={stat.label}
