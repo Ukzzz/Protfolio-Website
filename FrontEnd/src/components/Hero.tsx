@@ -182,7 +182,7 @@ const Hero: React.FC = () => {
                 5+
               </div>
               <div className="text-slate-600 font-medium">
-                Projects Completed
+                Projects
               </div>
             </div>
             <div className="text-center">
