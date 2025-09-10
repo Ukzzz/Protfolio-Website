@@ -216,8 +216,8 @@ const Skills: React.FC = () => {
                   <div className="text-slate-600 font-medium">Technologies</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-4xl font-bold gradient-text-primary mb-2">1+</div>
-                  <div className="text-slate-600 font-medium">Years Experience</div>
+                  <div className="text-4xl font-bold gradient-text-primary mb-2">6+</div>
+                  <div className="text-slate-600 font-medium">Month Academic Experience</div>
                 </div>
                 <div className="text-center">
                   <div className="text-4xl font-bold gradient-text-primary mb-2">100%</div>

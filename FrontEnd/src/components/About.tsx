@@ -10,6 +10,7 @@ const About: React.FC = () => {
   const stats = [
     { icon: Code, label: 'Projects Completed', value: '5+', color: 'from-blue-500 to-cyan-500' },
     { icon: Rocket, label: 'Technologies', value: '15+', color: 'from-orange-500 to-red-500' },
+    { icon: Rocket, label: 'Academic Experience', value: '6+ Months', color: 'from-orange-500 to-red-500' },
     { icon: Rocket, label: 'Commitment', value: '100%', color: 'from-blue-500 to-red-500' }
   ];
 

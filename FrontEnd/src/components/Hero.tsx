@@ -187,6 +187,14 @@ const Hero: React.FC = () => {
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold gradient-text-primary mb-2">
+                6+
+              </div>
+              <div className="text-slate-600 font-medium">
+                Academic Experience
+              </div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold gradient-text-primary mb-2">
                 100%
               </div>
               <div className="text-slate-600 font-medium">Commitment</div>

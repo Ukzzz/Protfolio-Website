@@ -108,6 +108,23 @@ export const projects: Project[] = [
     githubUrl: 'https://github.com/Ukzzz/Blog-Website-',
     featured: true,
     completedAt: '2023-08-15'
+  },
+      {
+    id: '6',
+    title: 'Real-Time Multiplayer Chess Game',
+    description: 'Interactive online chess platform with real-time multiplayer support.',
+    longDescription: 'Developed a real-time chess game supporting two-player matches and spectators. Features include drag-and-drop piece movement, legal move validation using the Chess.js library, and live updates across multiple clients via Socket.IO. The game detects check, checkmate, and draw conditions, and displays alerts for illegal moves. Built with Node.js, Express, and EJS for the frontend, ensuring responsive gameplay and synchronized board state for all connected players.',
+    image: '/U3.png',
+    images: [
+      '/U1.png',
+      '/U2.png',
+      '/U3.png',
+    ],
+    technologies: ['Node.js', 'Express.js', 'Socket.IO', 'Chess.js', 'EJS', 'CSS', 'HTML'],
+  category: 'fullstack',
+  githubUrl: 'https://github.com/Ukzzz/Chess.git',
+  featured: true,
+  completedAt: '2025-10-10',
   }
 ];
 
