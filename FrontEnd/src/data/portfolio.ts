@@ -106,7 +106,7 @@ export const projects: Project[] = [
     category: 'backend',
     demoUrl: 'https://blog-website-8gm4.onrender.com',
     githubUrl: 'https://github.com/Ukzzz/Blog-Website-',
-    featured: true,
+    featured: false,
     completedAt: '2023-08-15'
   },
       {
@@ -125,6 +125,25 @@ export const projects: Project[] = [
   githubUrl: 'https://github.com/Ukzzz/Chess.git',
   featured: true,
   completedAt: '2025-10-10',
+  },
+        {
+    id: '7',
+    title: 'Inventory & Barcode System',
+    description: 'A simple web-based inventory management system for uniforms with barcode scanning for delivery tracking.',
+    longDescription: 'This system is a complete solution for inventory and delivery management. It features secure admin and staff authentication, full CRUD inventory management with categories and auto-generated barcodes, and real-time stock tracking with low-stock alerts. Barcode scanning works via webcam or manual input and supports multiple formats, while the delivery system automates stock updates, customer tracking, and delivery history. Users can generate Excel and PDF reports and view real-time dashboard analytics with filtering options. The modern, responsive UI is built with Tailwind CSS and intuitive navigation. The tech stack includes Node.js, Express.js, MongoDB, EJS, JavaScript, and libraries like Bwip-js, QuaggaJS, XLSX, Puppeteer, Moment.js, and Bcrypt.',
+    image: '/E1.png',
+    images: [
+      '/E2.png',
+      '/E3.png',
+      '/E4.png',
+      '/E5.png',
+    ],
+    technologies: ['Node.js', 'Express.js', 'Socket.IO', 'MongoDB', 'EJS', 'Bwip-js', 'QuaggaJS','XLSX','Puppeteer','Bcrypt'],
+  category: 'backend',
+  demoUrl: 'https://inventroy-barcode.onrender.com',
+  githubUrl: 'https://github.com/Ukzzz/Inventroy-Barcode',
+  featured: true,
+  completedAt: '2025-11-11',
   }
 ];
 
