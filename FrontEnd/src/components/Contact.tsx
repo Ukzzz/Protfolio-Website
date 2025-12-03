@@ -1,47 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion, Variants } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, Linkedin, Github, Twitter, MessageCircle, Zap, Star } from 'lucide-react';
+import { Mail, Phone, MapPin, Linkedin, Github, Twitter, MessageCircle, Zap, Star } from 'lucide-react';
 import { personalInfo } from '../data/portfolio';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const Contact: React.FC = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-  });
-
   const { ref, controls } = useScrollAnimation();
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-
-  try {
-    const response = await fetch('https://protfolio-website-dvmt.onrender.com/api/contact', {  // Change URL if needed
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    });
-
-    if (response.ok) {
-      alert("Thank you for your message! I'll get back to you soon.");
-      setFormData({ name: '', email: '', subject: '', message: '' });
-    } else {
-      const data = await response.json();
-      alert('Error: ' + (data.error || 'Failed to send message'));
-    }
-  } catch (error) {
-    alert('Network error: Please try again later.');
-  }
-};
   
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -61,18 +25,6 @@ const containerVariants: Variants = {
       transition: {
         duration: 0.8,
         ease: [0.25, 0.25, 0.25, 0.75],
-      },
-    },
-  };
-
-  const floatingVariants: Variants = {
-    animate: {
-      y: [-10, 10, -10],
-      rotate: [0, 2, -2, 0],
-      transition: {
-        duration: 6,
-        repeat: Infinity,
-        ease: "easeInOut",
       },
     },
   };
@@ -134,7 +86,7 @@ const contactInfo = [
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
+          <div className="grid grid-cols-1 gap-20">
             {/* Enhanced Contact Information */}
             <motion.div 
               className="space-y-10"
@@ -238,103 +190,6 @@ const contactInfo = [
                   <span>Response time: Usually within 24 hours</span>
                 </div>
               </motion.div>
-            </motion.div>
-
-            {/* Enhanced Contact Form */}
-            <motion.div 
-              className="relative"
-              variants={itemVariants}
-            >
-              <div className="card p-10 relative overflow-hidden">
-                {/* Background Decoration */}
-                <motion.div
-                  className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-r from-blue-400/10 to-purple-400/10 rounded-full blur-3xl"
-                  variants={floatingVariants}
-                  animate="animate"
-                />
-
-                <h3 className="text-3xl font-bold text-slate-900 mb-8 flex items-center gap-3">
-                  <Send className="text-blue-500" size={32} />
-                  Send a Message
-                </h3>
-                
-                <form onSubmit={handleSubmit} className="space-y-8">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-semibold text-slate-700 mb-3">
-                        Name *
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-6 py-4 rounded-xl border-2 border-slate-200 bg-white text-slate-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 placeholder-slate-400"
-                        placeholder="Your name"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-semibold text-slate-700 mb-3">
-                        Email *
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-6 py-4 rounded-xl border-2 border-slate-200 bg-white text-slate-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 placeholder-slate-400"
-                        placeholder="your.email@example.com"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="subject" className="block text-sm font-semibold text-slate-700 mb-3">
-                      Subject *
-                    </label>
-                    <input
-                      type="text"
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-6 py-4 rounded-xl border-2 border-slate-200 bg-white text-slate-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 placeholder-slate-400"
-                      placeholder="What's this about?"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-semibold text-slate-700 mb-3">
-                      Message *
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                      rows={8}
-                      className="w-full px-6 py-4 rounded-xl border-2 border-slate-200 bg-white text-slate-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 resize-vertical placeholder-slate-400"
-                      placeholder="Tell me about your project or just say hello! I'm excited to hear from you."
-                    />
-                  </div>
-
-                  <motion.button
-                    type="submit"
-                    className="w-full btn-primary inline-flex items-center justify-center gap-3 py-4 text-lg font-semibold"
-                    whileHover={{ scale: 1.02, y: -2 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <Send size={20} />
-                    Send Message
-                  </motion.button>
-                </form>
-              </div>
             </motion.div>
           </div>
         </motion.div>
