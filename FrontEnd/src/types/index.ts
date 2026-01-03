@@ -27,7 +27,7 @@ export interface Experience {
   position: string;
   duration: string;
   description: string[];
-  technologies: string[];
+  technologies?: string[];
   logo?: string;
 }
 
@@ -65,17 +65,4 @@ export interface ThemeContextType {
   toggleTheme: () => void;
 }
 
-export interface AnimationVariants {
-  hidden: { opacity: number; y?: number; x?: number; scale?: number };
-  visible: { opacity: number; y?: number; x?: number; scale?: number };
-}
-
 export type FilterCategory = 'all' | 'frontend' | 'fullstack' | 'mobile' | 'backend' | 'design';
-
-export interface SEOProps {
-  title?: string;
-  description?: string;
-  keywords?: string;
-  image?: string;
-  url?: string;
-}

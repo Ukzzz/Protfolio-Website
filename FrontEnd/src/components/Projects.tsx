@@ -7,6 +7,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Star,
+  Layers,
 } from "lucide-react";
 import { projects } from "../data/portfolio";
 import { Project, FilterCategory } from "../types";
@@ -36,19 +37,20 @@ const Projects: React.FC = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
+        staggerChildren: 0.12,
       },
     },
   };
 
   const itemVariants: Variants = {
-    hidden: { y: 50, opacity: 0 },
+    hidden: { y: 50, opacity: 0, filter: "blur(10px)" },
     visible: {
       y: 0,
       opacity: 1,
+      filter: "blur(0px)",
       transition: {
-        duration: 0.8,
-        ease: [0.25, 0.25, 0.25, 0.75],
+        duration: 0.7,
+        ease: [0.25, 0.1, 0.25, 1],
       },
     },
   };
@@ -81,47 +83,59 @@ const Projects: React.FC = () => {
     }
   };
 
-  const getPlaceholderImage = (project: Project) => {
-    const categoryImages = {
-      frontend:
-        "https://images.unsplash.com/photo-1593720213428-28a5b9e94613?w=800&h=600&fit=crop",
-      fullstack:
-        "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&h=600&fit=crop",
-      mobile:
-        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop",
-      backend:
-        "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop",
-      design:
-        "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=600&fit=crop",
-    };
-    return categoryImages[project.category];
-  };
-
   return (
     <section
       id="projects"
-      className="section-padding bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/30"
+      className="section-padding relative overflow-hidden"
+      style={{ background: 'linear-gradient(180deg, #030014 0%, #0a0a1f 50%, #030014 100%)' }}
     >
-      <div className="container-custom">
+      {/* Background decorations */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div 
+          className="absolute top-[20%] left-[10%] w-[500px] h-[500px] rounded-full opacity-30"
+          style={{
+            background: 'radial-gradient(circle, rgba(6, 182, 212, 0.08) 0%, transparent 60%)',
+          }}
+        />
+        <div 
+          className="absolute bottom-[10%] right-[10%] w-[400px] h-[400px] rounded-full opacity-30"
+          style={{
+            background: 'radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 60%)',
+          }}
+        />
+      </div>
+
+      <div className="container-custom relative z-10">
         <motion.div
           ref={ref}
           initial="hidden"
           animate={controls}
           variants={containerVariants}
         >
-          {/* Enhanced Section Header */}
-          <motion.div className="text-center mb-20" variants={itemVariants}>
-            <h2 className="text-5xl md:text-6xl font-bold mb-8 gradient-text-primary text-shadow-xl">
-              Featured Projects
+          {/* Section Header */}
+          <motion.div className="text-center mb-16" variants={itemVariants}>
+            <motion.span 
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-6"
+              style={{
+                background: 'rgba(6, 182, 212, 0.1)',
+                border: '1px solid rgba(6, 182, 212, 0.2)',
+                color: '#22d3ee'
+              }}
+            >
+              <Layers size={16} />
+              My Work
+            </motion.span>
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8">
+              <span className="gradient-text-primary">Featured Projects</span>
             </h2>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
               Explore my latest work showcasing modern web development,
               innovative solutions, and cutting-edge technologies that deliver
               exceptional user experiences.
             </p>
           </motion.div>
 
-          {/* Enhanced Filter Buttons */}
+          {/* Filter Buttons */}
           <motion.div
             className="flex flex-wrap justify-center gap-4 mb-16"
             variants={itemVariants}
@@ -130,11 +144,19 @@ const Projects: React.FC = () => {
               <motion.button
                 key={option.value}
                 onClick={() => setFilter(option.value)}
-                className={`relative px-6 py-3 rounded-full font-semibold transition-all duration-300 flex items-center gap-2 ${
+                className={`relative px-6 py-3 rounded-xl font-semibold transition-all duration-300 flex items-center gap-2 ${
                   filter === option.value
-                    ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg shadow-blue-500/25"
-                    : "bg-white text-slate-700 hover:bg-slate-100 shadow-md hover:shadow-lg"
+                    ? "text-white"
+                    : "text-slate-400 hover:text-white"
                 }`}
+                style={{
+                  background: filter === option.value 
+                    ? 'linear-gradient(135deg, rgba(139, 92, 246, 0.3) 0%, rgba(6, 182, 212, 0.2) 100%)'
+                    : 'rgba(255, 255, 255, 0.03)',
+                  border: filter === option.value 
+                    ? '1px solid rgba(139, 92, 246, 0.4)'
+                    : '1px solid rgba(255, 255, 255, 0.05)'
+                }}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -142,18 +164,11 @@ const Projects: React.FC = () => {
                   {option.icon}
                   {option.label}
                 </span>
-                {filter === option.value && (
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full z-0"
-                    layoutId="activeFilter"
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                  />
-                )}
               </motion.button>
             ))}
           </motion.div>
 
-          {/* Enhanced Projects Grid */}
+          {/* Projects Grid */}
           <AnimatePresence mode="wait">
             <motion.div
               key={filter}
@@ -170,95 +185,85 @@ const Projects: React.FC = () => {
                   variants={itemVariants}
                   layoutId={`project-${project.id}`}
                   onClick={() => openModal(project)}
-                  whileHover={{ y: -12, scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
+                  whileHover={{ y: -12 }}
+                  transition={{ duration: 0.4 }}
                 >
-                  <div className="card overflow-hidden h-full">
-                    {/* Enhanced Project Image */}
-                    <div className="relative overflow-hidden aspect-video">
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          target.src = getPlaceholderImage(project);
-                        }}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div 
+                    className="relative rounded-2xl overflow-hidden h-full transition-all duration-500"
+                    style={{
+                      background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%)',
+                      border: '1px solid rgba(255, 255, 255, 0.05)'
+                    }}
+                  >
+                    {/* Hover gradient border */}
+                    <div 
+                      className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"
+                      style={{
+                        background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(6, 182, 212, 0.2) 100%)',
+                        padding: '1px'
+                      }}
+                    />
+                    
+                    {/* Top gradient line on hover */}
+                    <div 
+                      className="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                      style={{
+                        background: 'linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.8), rgba(6, 182, 212, 0.8), transparent)'
+                      }}
+                    />
 
-                      {/* Enhanced Featured Badge */}
-                      {project.featured && (
-                        <motion.div
-                          className="absolute top-4 left-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg"
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          transition={{ delay: index * 0.1 }}
-                        >
-                          ⭐ Featured
-                        </motion.div>
-                      )}
 
-                      {/* Enhanced Hover Overlay */}
-                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500">
-                        <motion.div
-                          className="bg-white rounded-full p-4 shadow-2xl"
-                          whileHover={{ scale: 1.1, rotate: 5 }}
-                          whileTap={{ scale: 0.9 }}
-                        >
-                          <ExternalLink className="text-blue-500" size={28} />
-                        </motion.div>
-                      </div>
-
-                      {/* Category Badge */}
-                      <div className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-medium">
-                        {project.category}
-                      </div>
-                    </div>
-
-                    {/* Enhanced Project Info */}
-                    <div className="p-8">
-                      <h3 className="text-2xl font-bold mb-4 text-slate-900 group-hover:text-blue-600 transition-colors duration-300">
+                    {/* Project Info */}
+                    <div className="p-6">
+                      <h3 className="text-xl font-bold mb-3 text-white group-hover:text-violet-300 transition-colors duration-300">
                         {project.title}
                       </h3>
-                      <p className="text-slate-600 mb-6 line-clamp-3 leading-relaxed">
+                      <p className="text-slate-400 mb-5 line-clamp-2 leading-relaxed text-sm">
                         {project.description}
                       </p>
 
-                      {/* Enhanced Technologies */}
-                      <div className="flex flex-wrap gap-2 mb-6">
+                      {/* Technologies */}
+                      <div className="flex flex-wrap gap-2 mb-5">
                         {project.technologies
                           .slice(0, 4)
                           .map((tech, techIndex) => (
-                            <motion.span
+                            <span
                               key={techIndex}
-                              className="px-3 py-1 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 rounded-full text-sm font-medium border border-blue-200"
-                              initial={{ scale: 0 }}
-                              animate={{ scale: 1 }}
-                              transition={{ delay: techIndex * 0.1 }}
+                              className="px-2.5 py-1 rounded-lg text-xs font-medium"
+                              style={{
+                                background: 'rgba(139, 92, 246, 0.1)',
+                                border: '1px solid rgba(139, 92, 246, 0.2)',
+                                color: '#c4b5fd'
+                              }}
                             >
                               {tech}
-                            </motion.span>
+                            </span>
                           ))}
                         {project.technologies.length > 4 && (
-                          <span className="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-sm font-medium">
+                          <span 
+                            className="px-2.5 py-1 rounded-lg text-xs font-medium"
+                            style={{
+                              background: 'rgba(255, 255, 255, 0.05)',
+                              color: '#64748b'
+                            }}
+                          >
                             +{project.technologies.length - 4}
                           </span>
                         )}
                       </div>
 
-                      {/* Enhanced Action Buttons */}
+                      {/* Action Links */}
                       <div className="flex gap-4">
                         {project.demoUrl && (
                           <motion.a
                             href={project.demoUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold transition-colors duration-200"
+                            className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-medium text-sm transition-colors duration-200"
                             onClick={(e) => e.stopPropagation()}
                             whileHover={{ x: 4 }}
                           >
-                            <ExternalLink size={18} />
+                            <ExternalLink size={16} />
                             Live Demo
                           </motion.a>
                         )}
@@ -267,12 +272,12 @@ const Projects: React.FC = () => {
                             href={project.githubUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 text-slate-600 hover:text-slate-800 font-semibold transition-colors duration-200"
+                            className="flex items-center gap-2 text-slate-400 hover:text-white font-medium text-sm transition-colors duration-200"
                             onClick={(e) => e.stopPropagation()}
                             whileHover={{ x: 4 }}
                           >
-                            <Github size={18} />
-                            View Code
+                            <Github size={16} />
+                            Code
                           </motion.a>
                         )}
                       </div>
@@ -285,7 +290,7 @@ const Projects: React.FC = () => {
         </motion.div>
       </div>
 
-      {/* Enhanced Project Modal */}
+      {/* Project Modal */}
       <AnimatePresence>
         {selectedProject && (
           <motion.div
@@ -294,101 +299,150 @@ const Projects: React.FC = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            {/* Enhanced Backdrop */}
+            {/* Backdrop */}
             <motion.div
-              className="absolute inset-0 bg-black/80 backdrop-blur-md"
+              className="absolute inset-0"
+              style={{
+                background: 'rgba(3, 0, 20, 0.9)',
+                backdropFilter: 'blur(20px)'
+              }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={closeModal}
             />
 
-            {/* Enhanced Modal Content */}
+            {/* Modal Content */}
             <motion.div
-              className="relative bg-white rounded-3xl max-w-5xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+              className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl"
+              style={{
+                background: 'linear-gradient(135deg, rgba(10, 10, 31, 0.98) 0%, rgba(3, 0, 20, 0.99) 100%)',
+                border: '1px solid rgba(139, 92, 246, 0.2)',
+                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 60px rgba(139, 92, 246, 0.15)'
+              }}
               initial={{ scale: 0.9, opacity: 0, y: 50 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 50 }}
               transition={{ duration: 0.4, ease: "easeOut" }}
             >
-              {/* Enhanced Close Button */}
+              {/* Top gradient line */}
+              <div 
+                className="absolute top-0 left-0 right-0 h-[2px] rounded-t-3xl"
+                style={{
+                  background: 'linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.8), rgba(6, 182, 212, 0.8), transparent)'
+                }}
+              />
+
+              {/* Close Button */}
               <button
                 onClick={closeModal}
-                className="absolute top-6 right-6 z-10 p-3 bg-black/20 hover:bg-black/40 rounded-full text-white transition-all duration-300 hover:scale-110"
+                className="absolute top-6 right-6 z-10 p-3 rounded-full transition-all duration-300"
+                style={{
+                  background: 'rgba(0, 0, 0, 0.5)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)'
+                }}
               >
-                <X size={24} />
+                <X size={20} className="text-white" />
               </button>
 
-              {/* Enhanced Image Gallery */}
+              {/* Image Gallery or Placeholder */}
               <div className="relative aspect-video">
-                <img
-                  src={selectedProject.images[currentImageIndex]}
-                  alt={selectedProject.title}
-                  className="w-full h-full object-cover rounded-t-3xl"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.src = getPlaceholderImage(selectedProject);
-                  }}
-                />
-
-                {/* Enhanced Navigation Arrows */}
-                {selectedProject.images.length > 1 && (
+                {selectedProject.images.length > 0 ? (
                   <>
-                    <button
-                      onClick={prevImage}
-                      className="absolute left-6 top-1/2 -translate-y-1/2 p-3 bg-black/30 hover:bg-black/50 rounded-full text-white transition-all duration-300 hover:scale-110 backdrop-blur-sm"
-                    >
-                      <ChevronLeft size={28} />
-                    </button>
-                    <button
-                      onClick={nextImage}
-                      className="absolute right-6 top-1/2 -translate-y-1/2 p-3 bg-black/30 hover:bg-black/50 rounded-full text-white transition-all duration-300 hover:scale-110 backdrop-blur-sm"
-                    >
-                      <ChevronRight size={28} />
-                    </button>
-                  </>
-                )}
+                    <img
+                      src={selectedProject.images[currentImageIndex]}
+                      alt={selectedProject.title}
+                      className="w-full h-full object-cover rounded-t-3xl"
+                    />
 
-                {/* Enhanced Image Indicators */}
-                {selectedProject.images.length > 1 && (
-                  <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3">
-                    {selectedProject.images.map((_, index) => (
-                      <button
-                        key={index}
-                        onClick={() => setCurrentImageIndex(index)}
-                        className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                          index === currentImageIndex
-                            ? "bg-white scale-125"
-                            : "bg-white/50 hover:bg-white/75"
-                        }`}
-                      />
-                    ))}
+                    {/* Navigation Arrows */}
+                    {selectedProject.images.length > 1 && (
+                      <>
+                        <button
+                          onClick={prevImage}
+                          className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full transition-all duration-300"
+                          style={{
+                            background: 'rgba(0, 0, 0, 0.5)',
+                            border: '1px solid rgba(255, 255, 255, 0.1)',
+                            backdropFilter: 'blur(10px)'
+                          }}
+                        >
+                          <ChevronLeft size={24} className="text-white" />
+                        </button>
+                        <button
+                          onClick={nextImage}
+                          className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full transition-all duration-300"
+                          style={{
+                            background: 'rgba(0, 0, 0, 0.5)',
+                            border: '1px solid rgba(255, 255, 255, 0.1)',
+                            backdropFilter: 'blur(10px)'
+                          }}
+                        >
+                          <ChevronRight size={24} className="text-white" />
+                        </button>
+                      </>
+                    )}
+
+                    {/* Image Indicators */}
+                    {selectedProject.images.length > 1 && (
+                      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                        {selectedProject.images.map((_, index) => (
+                          <button
+                            key={index}
+                            onClick={() => setCurrentImageIndex(index)}
+                            className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                              index === currentImageIndex
+                                ? "bg-white scale-125"
+                                : "bg-white/40 hover:bg-white/60"
+                            }`}
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  /* Placeholder when no images */
+                  <div 
+                    className="w-full h-full rounded-t-3xl flex items-center justify-center"
+                    style={{
+                      background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(6, 182, 212, 0.15) 100%)'
+                    }}
+                  >
+                    <div className="text-center">
+                      <Layers size={64} className="text-violet-400 mx-auto mb-4" />
+                      <p className="text-slate-400 font-medium">{selectedProject.title}</p>
+                    </div>
                   </div>
                 )}
               </div>
 
-              {/* Enhanced Project Details */}
-              <div className="p-10">
-                <h3 className="text-4xl font-bold mb-6 text-slate-900">
+              {/* Project Details */}
+              <div className="p-8">
+                <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
                   {selectedProject.title}
                 </h3>
-                <p className="text-lg text-slate-600 mb-8 leading-relaxed">
+                <p className="text-lg text-slate-400 mb-8 leading-relaxed">
                   {selectedProject.longDescription}
                 </p>
 
-                {/* Enhanced Technologies */}
+                {/* Technologies */}
                 <div className="mb-8">
-                  <h4 className="text-xl font-semibold mb-4 text-slate-900">
+                  <h4 className="text-lg font-semibold text-white mb-4">
                     Technologies Used
                   </h4>
-                  <div className="flex flex-wrap gap-3">
+                  <div className="flex flex-wrap gap-2">
                     {selectedProject.technologies.map((tech, index) => (
                       <motion.span
                         key={index}
-                        className="px-4 py-2 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 rounded-full text-sm font-semibold border border-blue-200"
+                        className="px-4 py-2 rounded-xl text-sm font-medium"
+                        style={{
+                          background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(6, 182, 212, 0.15) 100%)',
+                          border: '1px solid rgba(139, 92, 246, 0.3)',
+                          color: '#c4b5fd'
+                        }}
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
-                        transition={{ delay: index * 0.1 }}
+                        transition={{ delay: index * 0.05 }}
                       >
                         {tech}
                       </motion.span>
@@ -396,8 +450,8 @@ const Projects: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Enhanced Action Buttons */}
-                <div className="flex gap-6">
+                {/* Action Buttons */}
+                <div className="flex flex-wrap gap-4">
                   {selectedProject.demoUrl && (
                     <motion.a
                       href={selectedProject.demoUrl}
@@ -407,7 +461,7 @@ const Projects: React.FC = () => {
                       whileHover={{ scale: 1.05, y: -2 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      <ExternalLink size={20} />
+                      <ExternalLink size={18} />
                       View Live Demo
                     </motion.a>
                   )}
@@ -416,12 +470,17 @@ const Projects: React.FC = () => {
                       href={selectedProject.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      whileHover={{ scale: 1.05, y: -2 }}
+                      className="inline-flex items-center gap-3 px-6 py-3 rounded-xl font-semibold transition-all duration-300"
+                      style={{
+                        background: 'rgba(255, 255, 255, 0.05)',
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                        color: '#fff'
+                      }}
+                      whileHover={{ scale: 1.05, y: -2, backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
                       whileTap={{ scale: 0.95 }}
-                      className="inline-flex items-center px-4 py-2 rounded-2xl bg-gray-900 text-white hover:bg-gray-800 transition-all duration-200 shadow-md gap-2"
                     >
                       <Github size={18} />
-                      <span>View Source</span>
+                      View Source
                     </motion.a>
                   )}
                 </div>

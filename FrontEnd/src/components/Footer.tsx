@@ -6,9 +6,9 @@ import { personalInfo } from '../data/portfolio';
 const Footer: React.FC = () => {
   const socialLinks = [
     { icon: Linkedin, url: personalInfo.contact.linkedin, label: 'LinkedIn', color: 'from-blue-500 to-blue-600' },
-    { icon: Github, url: 'https://github.com/Ukzzz', label: 'GitHub', color: 'from-gray-700 to-gray-800' },
+    { icon: Github, url: 'https://github.com/Ukzzz', label: 'GitHub', color: 'from-slate-600 to-slate-700' },
     { icon: Twitter, url: personalInfo.contact.twitter, label: 'Twitter', color: 'from-sky-400 to-sky-500' },
-    { icon: Mail, url: `mailto:${personalInfo.contact.email}`, label: 'Email', color: 'from-green-500 to-emerald-500' },
+    { icon: Mail, url: `mailto:${personalInfo.contact.email}`, label: 'Email', color: 'from-emerald-500 to-green-600' },
   ];
 
   const quickLinks = [
@@ -27,12 +27,32 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-gradient-to-br from-slate-900 via-slate-800 to-purple-900/20 text-white relative overflow-hidden">
-      {/* Background Decorations */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl" />
+    <footer className="relative overflow-hidden" style={{ background: '#030014' }}>
+      {/* Background Effects */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div 
+          className="absolute top-0 left-1/4 w-[400px] h-[400px] rounded-full opacity-20"
+          style={{
+            background: 'radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%)',
+            filter: 'blur(60px)'
+          }}
+        />
+        <div 
+          className="absolute bottom-0 right-1/4 w-[500px] h-[500px] rounded-full opacity-20"
+          style={{
+            background: 'radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, transparent 70%)',
+            filter: 'blur(60px)'
+          }}
+        />
       </div>
+
+      {/* Top gradient border */}
+      <div 
+        className="absolute top-0 left-0 right-0 h-[1px]"
+        style={{
+          background: 'linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.3), rgba(6, 182, 212, 0.3), transparent)'
+        }}
+      />
 
       <div className="container-custom relative z-10">
         <div className="py-16">
@@ -41,27 +61,33 @@ const Footer: React.FC = () => {
             <div className="lg:col-span-2">
               <motion.div
                 className="flex items-center gap-3 mb-6"
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.02 }}
               >
-                <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                <div 
+                  className="w-12 h-12 rounded-xl flex items-center justify-center text-white font-bold text-lg"
+                  style={{
+                    background: 'linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%)',
+                    boxShadow: '0 10px 30px -10px rgba(139, 92, 246, 0.4)'
+                  }}
+                >
                   {personalInfo.name.split(' ').map(word => word[0]).join('')}
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold gradient-text-primary">
+                  <h3 className="text-xl font-bold gradient-text-primary">
                     {personalInfo.name}
                   </h3>
-                  <p className="text-slate-400 text-sm">
+                  <p className="text-slate-500 text-sm">
                     Full Stack Developer
                   </p>
                 </div>
               </motion.div>
               
-              <p className="text-slate-300 mb-8 leading-relaxed max-w-md">
+              <p className="text-slate-400 mb-8 leading-relaxed max-w-md">
                 Passionate about creating exceptional digital experiences and turning innovative ideas into reality through modern web technologies.
               </p>
 
-              {/* Enhanced Social Links */}
-              <div className="flex gap-4">
+              {/* Social Links */}
+              <div className="flex gap-3">
                 {socialLinks.map((social, index) => {
                   const Icon = social.icon;
                   return social.url ? (
@@ -70,20 +96,20 @@ const Footer: React.FC = () => {
                       href={social.url}
                       target={social.label !== 'Email' ? '_blank' : undefined}
                       rel={social.label !== 'Email' ? 'noopener noreferrer' : undefined}
-                      className={`p-3 bg-gradient-to-r ${social.color} rounded-xl text-white shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden group`}
+                      className={`p-3 rounded-xl bg-gradient-to-br ${social.color} text-white relative overflow-hidden group`}
+                      style={{
+                        boxShadow: '0 10px 30px -10px rgba(0, 0, 0, 0.3)'
+                      }}
                       whileHover={{ scale: 1.1, y: -4 }}
                       whileTap={{ scale: 0.9 }}
-                      aria-label={social.label}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.1 }}
+                      aria-label={social.label}
                     >
-                      <Icon size={20} className="relative z-10" />
-                      <motion.div
-                        className="absolute inset-0 bg-white/20"
-                        initial={{ scale: 0 }}
-                        whileHover={{ scale: 1 }}
-                        transition={{ duration: 0.2 }}
+                      <Icon size={18} className="relative z-10" />
+                      <div 
+                        className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                       />
                     </motion.a>
                   ) : null;
@@ -93,8 +119,8 @@ const Footer: React.FC = () => {
 
             {/* Quick Links */}
             <div>
-              <h4 className="text-lg font-semibold mb-6 flex items-center gap-2">
-                <Star className="text-yellow-500" size={20} />
+              <h4 className="text-base font-semibold text-white mb-6 flex items-center gap-2">
+                <Star className="text-amber-400" size={18} />
                 Quick Links
               </h4>
               <div className="space-y-3">
@@ -109,11 +135,11 @@ const Footer: React.FC = () => {
                         element.scrollIntoView({ behavior: 'smooth' });
                       }
                     }}
-                    className="block text-slate-300 hover:text-white transition-colors duration-200 hover:translate-x-2 transform"
-                    whileHover={{ x: 4 }}
-                    initial={{ opacity: 0, x: -20 }}
+                    className="block text-slate-400 hover:text-white transition-colors duration-200 text-sm"
+                    whileHover={{ x: 4, color: '#a78bfa' }}
+                    initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
+                    transition={{ delay: index * 0.05 }}
                   >
                     {link.name}
                   </motion.a>
@@ -123,44 +149,50 @@ const Footer: React.FC = () => {
 
             {/* Contact Info */}
             <div>
-              <h4 className="text-lg font-semibold mb-6 flex items-center gap-2">
-                <Zap className="text-blue-500" size={20} />
+              <h4 className="text-base font-semibold text-white mb-6 flex items-center gap-2">
+                <Zap className="text-cyan-400" size={18} />
                 Contact Info
               </h4>
-              <div className="space-y-3">
-                <div className="text-slate-300">
-                  <p className="text-sm text-slate-400 mb-1">Email</p>
+              <div className="space-y-4">
+                <div>
+                  <p className="text-xs text-slate-500 mb-1">Email</p>
                   <a 
                     href={`mailto:${personalInfo.contact.email}`}
-                    className="hover:text-white transition-colors duration-200"
+                    className="text-slate-400 hover:text-white transition-colors duration-200 text-sm"
                   >
                     {personalInfo.contact.email}
                   </a>
                 </div>
-                <div className="text-slate-300">
-                  <p className="text-sm text-slate-400 mb-1">Location</p>
-                  <p>{personalInfo.contact.location}</p>
+                <div>
+                  <p className="text-xs text-slate-500 mb-1">Location</p>
+                  <p className="text-slate-400 text-sm">{personalInfo.contact.location}</p>
                 </div>
-                <div className="text-slate-300">
-                  <p className="text-sm text-slate-400 mb-1">Status</p>
+                <div>
+                  <p className="text-xs text-slate-500 mb-1">Status</p>
                   <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                    <span className="text-green-400">Available for work</span>
+                    <div className="relative">
+                      <div className="w-2 h-2 bg-emerald-400 rounded-full" />
+                      <div className="absolute inset-0 bg-emerald-400 rounded-full animate-ping opacity-75" />
+                    </div>
+                    <span className="text-emerald-400 text-sm">Available for work</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Enhanced Copyright Section */}
-          <div className="border-t border-slate-700 pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+          {/* Copyright Section */}
+          <div 
+            className="pt-8"
+            style={{ borderTop: '1px solid rgba(255, 255, 255, 0.05)' }}
+          >
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <motion.p 
-                className="flex items-center gap-2 text-slate-400 text-sm"
-                initial={{ opacity: 0, y: 20 }}
+                className="flex items-center gap-2 text-slate-500 text-sm"
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
               >
-                <span>&copy; {currentYear} {personalInfo.name}. Made with</span>
+                <span>© {currentYear} {personalInfo.name}. Made with</span>
                 <motion.span
                   animate={{ scale: [1, 1.2, 1] }}
                   transition={{
@@ -169,19 +201,27 @@ const Footer: React.FC = () => {
                     repeatType: 'reverse',
                   }}
                 >
-                  <Heart className="text-red-500" size={16} fill="currentColor" />
+                  <Heart className="text-rose-500" size={14} fill="currentColor" />
                 </motion.span>
                 <span>and lots of ☕</span>
               </motion.p>
 
               <motion.button
                 onClick={scrollToTop}
-                className="p-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl text-white shadow-lg hover:shadow-xl transition-all duration-300"
-                whileHover={{ scale: 1.1, y: -4 }}
+                className="p-3 rounded-xl transition-all duration-300"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(6, 182, 212, 0.2) 100%)',
+                  border: '1px solid rgba(139, 92, 246, 0.3)'
+                }}
+                whileHover={{ 
+                  scale: 1.1, 
+                  y: -4,
+                  boxShadow: '0 10px 30px -10px rgba(139, 92, 246, 0.5)'
+                }}
                 whileTap={{ scale: 0.9 }}
                 aria-label="Scroll to top"
               >
-                <ArrowUp size={20} />
+                <ArrowUp size={18} className="text-violet-400" />
               </motion.button>
             </div>
           </div>

@@ -1,11 +1,6 @@
 import React from "react";
 import { motion, Variants } from "framer-motion";
-import {
-  ArrowDown,
-  Download,
-  ExternalLink,
-  Sparkles,
-} from "lucide-react";
+import { ArrowDown, Download, ExternalLink, Sparkles, Code, Award, Rocket, Zap } from "lucide-react";
 import { personalInfo } from "../data/portfolio";
 
 const Hero: React.FC = () => {
@@ -21,139 +16,128 @@ const Hero: React.FC = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
+        staggerChildren: 0.15,
+        delayChildren: 0.2,
       },
     },
   };
 
   const itemVariants: Variants = {
-    hidden: { y: 50, opacity: 0 },
+    hidden: { y: 50, opacity: 0, filter: "blur(10px)" },
     visible: {
       y: 0,
       opacity: 1,
+      filter: "blur(0px)",
       transition: {
-        duration: 1,
-        ease: [0.25, 0.25, 0.25, 0.75],
+        duration: 0.7,
+        ease: [0.25, 0.1, 0.25, 1],
       },
     },
   };
 
-  const floatingVariants: Variants = {
-    animate: {
-      y: [-15, 15, -15],
-      rotate: [0, 5, -5, 0],
-      transition: {
-        duration: 8,
-        repeat: Infinity,
-        ease: "easeInOut",
-      },
-    },
-  };
-
+  const stats = [
+    { icon: Code, label: 'Projects Completed', value: '7+', color: 'from-violet-500 to-purple-600' },
+    { icon: Award, label: 'Technologies', value: '15+', color: 'from-cyan-500 to-blue-600' },
+    { icon: Rocket, label: 'Experience', value: '6+ Months', color: 'from-pink-500 to-rose-600' },
+    { icon: Zap, label: 'Commitment', value: '100%', color: 'from-amber-500 to-orange-600' }
+  ];
 
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-pattern pt-32"
+      className="min-h-screen flex items-center relative overflow-hidden"
+      style={{ background: 'linear-gradient(180deg, #030014 0%, #0a0a1f 50%, #030014 100%)' }}
     >
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/50 to-purple-50/50" />
+      {/* Background decorations */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div 
+          className="absolute top-[10%] right-[10%] w-[500px] h-[500px] rounded-full opacity-30"
+          style={{
+            background: 'radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%)',
+            filter: 'blur(60px)'
+          }}
+        />
+        <div 
+          className="absolute bottom-[20%] left-[5%] w-[400px] h-[400px] rounded-full opacity-30"
+          style={{
+            background: 'radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, transparent 70%)',
+            filter: 'blur(60px)'
+          }}
+        />
+        <div 
+          className="absolute top-[50%] left-[50%] w-[600px] h-[600px] rounded-full opacity-20"
+          style={{
+            background: 'radial-gradient(circle, rgba(236, 72, 153, 0.1) 0%, transparent 70%)',
+            filter: 'blur(80px)',
+            transform: 'translate(-50%, -50%)'
+          }}
+        />
       </div>
 
-      <div className="container-custom section-padding">
+      <div className="container-custom relative z-10 pt-32 pb-20">
         <motion.div
           className="text-center max-w-5xl mx-auto"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          <motion.div className="mb-12" variants={itemVariants}>
-            <motion.div
-              className="relative w-48 h-48 mx-auto mb-8"
-              variants={floatingVariants}
-              animate="animate"
+          {/* Badge */}
+          <motion.div variants={itemVariants} className="mb-8">
+            <span 
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium"
+              style={{
+                background: 'rgba(139, 92, 246, 0.1)',
+                border: '1px solid rgba(139, 92, 246, 0.2)',
+                color: '#a78bfa'
+              }}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full p-1 animate-pulse">
-                <div className="w-full h-full bg-white rounded-full overflow-hidden ring-4 ring-white shadow-2xl">
-                  <img
-                    src={personalInfo.avatar}
-                    alt={personalInfo.name}
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = `https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face`;
-                    }}
-                  />
-                </div>
-              </div>
-
-              <motion.div
-                className="absolute -top-2 -right-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg"
-                animate={{
-                  scale: [1, 1.1, 1],
-                  rotate: [0, 5, -5, 0],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              >
-                Available
-              </motion.div>
-            </motion.div>
-          </motion.div>
-
-          <motion.div className="mb-6" variants={itemVariants}>
-            <span className="inline-flex items-center gap-2 text-blue-600 font-semibold text-lg bg-blue-50 px-4 py-2 rounded-full">
-              <Sparkles size={16} />
+              <Sparkles size={16} className="text-violet-400" />
               Hello, I'm
             </span>
           </motion.div>
 
           {/* Name */}
           <motion.h1
-            className="text-6xl md:text-8xl font-bold mb-8 gradient-text-primary text-shadow-xl"
+            className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight"
             variants={itemVariants}
           >
-            {personalInfo.name}
+            <span className="gradient-text-primary">{personalInfo.name}</span>
           </motion.h1>
 
           {/* Title */}
           <motion.h2
-            className="text-3xl md:text-4xl font-light text-slate-600 mb-10 leading-tight"
+            className="text-2xl md:text-3xl font-light mb-8 leading-relaxed"
             variants={itemVariants}
+            style={{ color: '#94a3b8' }}
           >
             {personalInfo.title}
           </motion.h2>
 
           {/* Bio */}
           <motion.p
-            className="text-xl text-slate-600 max-w-3xl mx-auto mb-16 leading-relaxed"
+            className="text-lg md:text-xl max-w-3xl mx-auto mb-12 leading-relaxed"
             variants={itemVariants}
+            style={{ color: '#64748b' }}
           >
-            {personalInfo.bio}
+            I specialize in building modern, scalable web applications with the MERN stack. 
+            Passionate about creating exceptional digital experiences that combine beautiful design 
+            with powerful functionality.
           </motion.p>
 
           {/* CTA Buttons */}
           <motion.div
-            className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-20"
+            className="flex flex-col sm:flex-row gap-5 justify-center items-center mb-20"
             variants={itemVariants}
           >
             <motion.a
               href="#projects"
               onClick={(e) => {
                 e.preventDefault();
-                const projectsSection = document.querySelector("#projects");
-                if (projectsSection) {
-                  projectsSection.scrollIntoView({ behavior: "smooth" });
-                }
+                document.querySelector("#projects")?.scrollIntoView({ behavior: "smooth" });
               }}
               className="btn-primary inline-flex items-center gap-3 text-lg px-8 py-4"
-              whileHover={{ scale: 1.05, y: -3 }}
+              whileHover={{ scale: 1.05, y: -4 }}
               whileTap={{ scale: 0.95 }}
-              aria-label="View My Work - Scroll to Projects section"
             >
               <ExternalLink size={20} />
               View My Work
@@ -161,53 +145,81 @@ const Hero: React.FC = () => {
 
             <motion.a
               href={personalInfo.resume}
-              className="btn-primary inline-flex items-center gap-3 text-lg px-8 py-4"
-              whileHover={{ scale: 1.05, y: -3 }}
+              className="group inline-flex items-center gap-3 text-lg px-8 py-4 rounded-2xl font-semibold transition-all duration-300"
+              style={{
+                background: 'rgba(139, 92, 246, 0.1)',
+                border: '2px solid rgba(139, 92, 246, 0.3)',
+                color: '#a78bfa'
+              }}
+              whileHover={{ 
+                scale: 1.05, 
+                y: -4,
+                backgroundColor: 'rgba(139, 92, 246, 0.2)',
+                borderColor: 'rgba(139, 92, 246, 0.5)'
+              }}
               whileTap={{ scale: 0.95 }}
               download
-              aria-label="Download Resume"
             >
-              <Download size={20} />
+              <Download size={20} className="group-hover:animate-bounce" />
               Download Resume
             </motion.a>
           </motion.div>
 
           {/* Stats Section */}
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto mb-16 place-items-center"
+            className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16"
             variants={itemVariants}
           >
-            <div className="text-center">
-              <div className="text-3xl font-bold gradient-text-primary mb-2">
-                5+
-              </div>
-              <div className="text-slate-600 font-medium">
-                Projects
-              </div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold gradient-text-primary mb-2">
-                6+
-              </div>
-              <div className="text-slate-600 font-medium">
-                Academic Experience
-              </div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold gradient-text-primary mb-2">
-                100%
-              </div>
-              <div className="text-slate-600 font-medium">Commitment</div>
-            </div>
+            {stats.map((stat) => (
+              <motion.div
+                key={stat.label}
+                className="relative group"
+                whileHover={{ y: -8, scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div 
+                  className="p-6 rounded-2xl text-center h-full transition-all duration-300"
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.02)',
+                    border: '1px solid rgba(255, 255, 255, 0.05)'
+                  }}
+                >
+                  <div 
+                    className={`inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-4 bg-gradient-to-br ${stat.color}`}
+                    style={{
+                      boxShadow: '0 10px 30px -10px rgba(139, 92, 246, 0.3)'
+                    }}
+                  >
+                    <stat.icon className="text-white" size={28} />
+                  </div>
+                  <div className="text-3xl md:text-4xl font-bold gradient-text-primary mb-2">
+                    {stat.value}
+                  </div>
+                  <div className="text-slate-400 font-medium text-sm">
+                    {stat.label}
+                  </div>
+                </div>
+                
+                {/* Hover glow */}
+                <div 
+                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"
+                  style={{
+                    background: 'radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%)',
+                    filter: 'blur(20px)',
+                    transform: 'scale(1.1)'
+                  }}
+                />
+              </motion.div>
+            ))}
           </motion.div>
 
           {/* Scroll Indicator */}
           <motion.button
             onClick={scrollToNext}
-            className="text-slate-400 hover:text-blue-500 transition-colors duration-300 group"
+            className="group flex flex-col items-center gap-3 mx-auto"
             variants={itemVariants}
             animate={{
-              y: [0, 10, 0],
+              y: [0, 12, 0],
             }}
             transition={{
               duration: 2,
@@ -216,13 +228,19 @@ const Hero: React.FC = () => {
             }}
             aria-label="Scroll to next section"
           >
-            <div className="flex flex-col items-center gap-2">
-              <span className="text-sm font-medium group-hover:text-blue-500 transition-colors">
-                Explore More
-              </span>
+            <span className="text-sm font-medium text-slate-500 group-hover:text-violet-400 transition-colors">
+              Explore More
+            </span>
+            <div 
+              className="p-3 rounded-full transition-all duration-300 group-hover:bg-violet-500/10"
+              style={{
+                background: 'rgba(139, 92, 246, 0.1)',
+                border: '1px solid rgba(139, 92, 246, 0.2)'
+              }}
+            >
               <ArrowDown
-                size={32}
-                className="group-hover:scale-110 transition-transform"
+                size={24}
+                className="text-violet-400 group-hover:text-violet-300 transition-colors"
               />
             </div>
           </motion.button>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, Variants } from 'framer-motion';
-import { Download, Briefcase, GraduationCap } from 'lucide-react';
+import { Download, Briefcase, GraduationCap, Calendar, MapPin } from 'lucide-react';
 import { experiences, education, personalInfo } from '../data/portfolio';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
@@ -12,26 +12,49 @@ const Resume: React.FC = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.15,
       },
     },
   };
 
   const itemVariants: Variants = {
-    hidden: { x: -30, opacity: 0 },
+    hidden: { y: 50, opacity: 0, filter: "blur(10px)" },
     visible: {
-      x: 0,
+      y: 0,
       opacity: 1,
+      filter: "blur(0px)",
       transition: {
-        duration: 0.6,
-        ease: [0.25, 0.25, 0.25, 0.75],
+        duration: 0.7,
+        ease: [0.25, 0.1, 0.25, 1],
       },
     },
   };
 
   return (
-    <section id="resume" className="section-padding bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
-      <div className="container-custom">
+    <section 
+      id="resume" 
+      className="section-padding relative overflow-hidden"
+      style={{ background: 'linear-gradient(180deg, #030014 0%, #0a0a1f 50%, #030014 100%)' }}
+    >
+      {/* Background decorations */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div 
+          className="absolute top-[20%] left-[10%] w-[400px] h-[400px] rounded-full opacity-30"
+          style={{
+            background: 'radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%)',
+            filter: 'blur(60px)'
+          }}
+        />
+        <div 
+          className="absolute bottom-[30%] right-[10%] w-[350px] h-[350px] rounded-full opacity-30"
+          style={{
+            background: 'radial-gradient(circle, rgba(236, 72, 153, 0.1) 0%, transparent 70%)',
+            filter: 'blur(60px)'
+          }}
+        />
+      </div>
+
+      <div className="container-custom relative z-10">
         <motion.div
           ref={ref}
           initial="hidden"
@@ -43,48 +66,101 @@ const Resume: React.FC = () => {
             className="text-center mb-20"
             variants={itemVariants}
           >
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 gradient-text-primary text-shadow-xl flex items-center justify-center gap-3">
-              <Briefcase className="text-blue-500" size={40} />
+            <motion.span 
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-6"
+              style={{
+                background: 'rgba(236, 72, 153, 0.1)',
+                border: '1px solid rgba(236, 72, 153, 0.2)',
+                color: '#f472b6'
+              }}
+            >
+              <Calendar size={16} />
               My Journey
+            </motion.span>
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8">
+              <span className="gradient-text-primary">My Journey</span>
             </h2>
-            <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
               A summary of my professional experience and educational background. For more details, download my resume.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
             {/* Experience Section */}
             <motion.div variants={itemVariants}>
-              <div className="flex items-center gap-3 mb-10">
-                <div className="p-4 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl shadow-lg">
-                  <Briefcase className="text-white" size={32} />
+              <div className="flex items-center gap-4 mb-10">
+                <div 
+                  className="p-4 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600"
+                  style={{
+                    boxShadow: '0 10px 40px -10px rgba(6, 182, 212, 0.4)'
+                  }}
+                >
+                  <Briefcase className="text-white" size={28} />
                 </div>
                 <div>
-                  <h3 className="text-3xl font-bold text-slate-900 mb-1">Experience</h3>
-                  <p className="text-slate-500">Professional background</p>
+                  <h3 className="text-2xl font-bold text-white">Experience</h3>
+                  <p className="text-slate-400 text-sm">Professional background</p>
                 </div>
               </div>
 
               <div className="relative pl-8">
-                {/* Vertical line */}
-                <div className="absolute left-3 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-200 to-blue-400 rounded-full" />
-                <div className="space-y-12">
+                {/* Timeline line */}
+                <div 
+                  className="absolute left-[11px] top-2 bottom-2 w-[2px] rounded-full"
+                  style={{
+                    background: 'linear-gradient(180deg, rgba(6, 182, 212, 0.5) 0%, rgba(6, 182, 212, 0.1) 100%)'
+                  }}
+                />
+                
+                <div className="space-y-8">
                   {experiences.map((exp, index) => (
-                    <motion.div key={exp.id} variants={itemVariants} className="relative">
+                    <motion.div 
+                      key={exp.id} 
+                      className="relative"
+                      initial={{ opacity: 0, x: -30 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.2 }}
+                    >
                       {/* Timeline dot */}
-                      <div className="absolute -left-5 top-2 w-6 h-6 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full border-4 border-white shadow-lg z-10" />
-                      <div className="ml-4 bg-white rounded-2xl shadow-md border border-blue-100 p-6 hover:shadow-xl transition-all duration-300">
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="font-bold text-lg text-slate-900">{exp.position}</span>
-                          <span className="text-blue-500 font-semibold">@ {exp.company}</span>
+                      <div 
+                        className="absolute -left-[21px] top-2 w-6 h-6 rounded-full flex items-center justify-center"
+                        style={{
+                          background: 'linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%)',
+                          boxShadow: '0 0 20px rgba(6, 182, 212, 0.5)'
+                        }}
+                      >
+                        <div className="w-2 h-2 bg-white rounded-full" />
+                      </div>
+                      
+                      <motion.div 
+                        className="ml-4 p-6 rounded-2xl transition-all duration-300"
+                        style={{
+                          background: 'rgba(255, 255, 255, 0.02)',
+                          border: '1px solid rgba(255, 255, 255, 0.05)'
+                        }}
+                        whileHover={{ 
+                          backgroundColor: 'rgba(6, 182, 212, 0.05)',
+                          borderColor: 'rgba(6, 182, 212, 0.2)'
+                        }}
+                      >
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-3">
+                          <span className="font-bold text-lg text-white">{exp.position}</span>
+                          <span className="text-cyan-400 font-semibold">@ {exp.company}</span>
                         </div>
-                        <div className="text-sm text-slate-500 mb-3">{exp.duration}</div>
-                        <ul className="list-disc list-inside space-y-2 text-slate-600">
+                        <div className="flex items-center gap-2 text-sm text-slate-500 mb-4">
+                          <Calendar size={14} />
+                          {exp.duration}
+                        </div>
+                        <ul className="space-y-2">
                           {exp.description.map((desc, i) => (
-                            <li key={i}>{desc}</li>
+                            <li key={i} className="text-slate-400 flex items-start gap-2">
+                              <span className="text-cyan-400 mt-1.5">•</span>
+                              {desc}
+                            </li>
                           ))}
                         </ul>
-                      </div>
+                      </motion.div>
                     </motion.div>
                   ))}
                 </div>
@@ -93,32 +169,93 @@ const Resume: React.FC = () => {
 
             {/* Education Section */}
             <motion.div variants={itemVariants}>
-              <div className="flex items-center gap-3 mb-10">
-                <div className="p-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl shadow-lg">
-                  <GraduationCap className="text-white" size={32} />
+              <div className="flex items-center gap-4 mb-10">
+                <div 
+                  className="p-4 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600"
+                  style={{
+                    boxShadow: '0 10px 40px -10px rgba(139, 92, 246, 0.4)'
+                  }}
+                >
+                  <GraduationCap className="text-white" size={28} />
                 </div>
                 <div>
-                  <h3 className="text-3xl font-bold text-slate-900 mb-1">Education</h3>
-                  <p className="text-slate-500">Academic background</p>
+                  <h3 className="text-2xl font-bold text-white">Education</h3>
+                  <p className="text-slate-400 text-sm">Academic background</p>
                 </div>
               </div>
 
               <div className="relative pl-8">
-                {/* Vertical line */}
-                <div className="absolute left-3 top-0 bottom-0 w-1 bg-gradient-to-b from-purple-200 to-pink-300 rounded-full" />
-                <div className="space-y-12">
+                {/* Timeline line */}
+                <div 
+                  className="absolute left-[11px] top-2 bottom-2 w-[2px] rounded-full"
+                  style={{
+                    background: 'linear-gradient(180deg, rgba(139, 92, 246, 0.5) 0%, rgba(139, 92, 246, 0.1) 100%)'
+                  }}
+                />
+                
+                <div className="space-y-8">
                   {education.map((edu, index) => (
-                    <motion.div key={edu.id} variants={itemVariants} className="relative">
+                    <motion.div 
+                      key={edu.id} 
+                      className="relative"
+                      initial={{ opacity: 0, x: -30 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.2 }}
+                    >
                       {/* Timeline dot */}
-                      <div className="absolute -left-5 top-2 w-6 h-6 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full border-4 border-white shadow-lg z-10" />
-                      <div className="ml-4 bg-white rounded-2xl shadow-md border border-purple-100 p-6 hover:shadow-xl transition-all duration-300">
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="font-bold text-lg text-slate-900">{edu.degree}</span>
-                          <span className="text-purple-500 font-semibold">in {edu.field}</span>
-                        </div>
-                        <div className="text-sm text-slate-500 mb-3">{edu.institution} | {edu.duration}</div>
-                        <p className="text-slate-600">{edu.description}</p>
+                      <div 
+                        className="absolute -left-[21px] top-2 w-6 h-6 rounded-full flex items-center justify-center"
+                        style={{
+                          background: 'linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%)',
+                          boxShadow: '0 0 20px rgba(139, 92, 246, 0.5)'
+                        }}
+                      >
+                        <div className="w-2 h-2 bg-white rounded-full" />
                       </div>
+                      
+                      <motion.div 
+                        className="ml-4 p-6 rounded-2xl transition-all duration-300"
+                        style={{
+                          background: 'rgba(255, 255, 255, 0.02)',
+                          border: '1px solid rgba(255, 255, 255, 0.05)'
+                        }}
+                        whileHover={{ 
+                          backgroundColor: 'rgba(139, 92, 246, 0.05)',
+                          borderColor: 'rgba(139, 92, 246, 0.2)'
+                        }}
+                      >
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-3">
+                          <span className="font-bold text-lg text-white">{edu.degree}</span>
+                          <span className="text-violet-400 font-semibold">in {edu.field}</span>
+                        </div>
+                        <div className="flex items-center gap-4 text-sm text-slate-500 mb-4">
+                          <span className="flex items-center gap-1.5">
+                            <MapPin size={14} />
+                            {edu.institution}
+                          </span>
+                          <span className="flex items-center gap-1.5">
+                            <Calendar size={14} />
+                            {edu.duration}
+                          </span>
+                        </div>
+                        {edu.description && (
+                          <p className="text-slate-400">{edu.description}</p>
+                        )}
+                        {edu.gpa && (
+                          <div className="mt-3">
+                            <span 
+                              className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium"
+                              style={{
+                                background: 'rgba(139, 92, 246, 0.15)',
+                                color: '#c4b5fd'
+                              }}
+                            >
+                              GPA: {edu.gpa}
+                            </span>
+                          </div>
+                        )}
+                      </motion.div>
                     </motion.div>
                   ))}
                 </div>
@@ -131,14 +268,16 @@ const Resume: React.FC = () => {
             className="text-center mt-20"
             variants={itemVariants}
           >
-            <a
+            <motion.a
               href={personalInfo.resume}
-              className="btn-primary inline-flex items-center gap-3 text-lg px-8 py-4 shadow-lg hover:shadow-xl transition-all duration-300"
+              className="btn-primary inline-flex items-center gap-3 text-lg px-8 py-4"
               download
+              whileHover={{ scale: 1.05, y: -4 }}
+              whileTap={{ scale: 0.95 }}
             >
               <Download size={22} />
               Download My Resume
-            </a>
+            </motion.a>
           </motion.div>
         </motion.div>
       </div>
