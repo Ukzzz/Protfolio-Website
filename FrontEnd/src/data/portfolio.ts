@@ -1,4 +1,4 @@
-import { PersonalInfo, Project, Skill, Experience, Education } from '../types';
+import { PersonalInfo, Project, Skill, Education } from '../types';
 
 export const personalInfo: PersonalInfo = {
   name: 'Uzair Kashif',
@@ -114,7 +114,72 @@ export const projects: Project[] = [
     githubUrl: 'https://github.com/Ukzzz/Inventroy-Barcode',
     featured: true,
     completedAt: '2025-11-11',
-  }
+  },
+    {
+    id: '8',
+    title: 'License Plate Detection System',
+    description: 'A computer vision project that detects vehicle license plates in video streams and extracts their text using OCR',
+    longDescription: 'A computer vision project that detects vehicle license plates in video streams and extracts their text using OCR. This system leverages the YOLOv8 object detection model and EasyOCR for text recognition, wrapped in a processing pipeline that includes image enhancement for improved accuracy.',
+    image: '',
+    images: [],
+    technologies: ['Ultralytics YOLOv8', 'EasyOCR', 'OpenCV (cv2)', 'Google Colab', 'Python',],
+    category: 'computer vision',
+    githubUrl: 'https://github.com/Ukzzz/LPR-System',
+    featured: true,
+    completedAt: '2026-02-05',
+  },
+      {
+    id: '9',
+    title: 'Car Detection System',
+    description: 'This project implements a high-accuracy vehicle detection system specializing in identifying cars',
+    longDescription: 'This project implements a high-accuracy vehicle detection system specializing in identifying cars within video streams and images. Built upon the Ultralytics YOLOv8 (You Only Look Once) architecture, it leverages deep learning to provide valid bounding box predictions in real-time.The project is designed to run in a GPU-accelerated environment (like Google Colab) and includes a full pipeline for data handling, training, validation, and inference.',
+    image: '',
+    images: [],
+    technologies: ['Ultralytics YOLOv8', 'EasyOCR', 'OpenCV (cv2)', 'Google Colab', 'Python',],
+    category: 'computer vision',
+    githubUrl: 'https://github.com/Ukzzz/Car-Detection/',
+    featured: true,
+    completedAt: '2026-02-13',
+  },
+      {
+    id: '10',
+    title: 'Heart Disease Detection & Prediction',
+    description: 'A comprehensive Machine Learning project for predicting heart disease using patient clinical data.',
+    longDescription: 'A comprehensive Machine Learning project for predicting heart disease using patient clinical data. This project implements multiple classification algorithms to identify patients at risk of heart disease based on various medical parameters.',
+    image: '',
+    images: [],
+    technologies: ['Random Forest Classifier', 'Pandas',  'NumPy', 'Google Colab', 'Python','Scikit-learn','Matplotlib',],
+    category: 'machine learning',
+    githubUrl: 'https://github.com/Ukzzz/Hear-Diesease-P',
+    featured: true,
+    completedAt: '2026-01-05',
+  },
+  {
+    id: '11',
+    title: 'Movie Recommendation System',
+    description: 'A Content-Based Movie Recommendation System built using Natural Language Processing (NLP)',
+    longDescription: 'A Content-Based Movie Recommendation System built using Natural Language Processing (NLP) and unsupervised machine learning techniques. The system analyzes movie metadata to find similar movies based on plot, genre, cast, and director information.',
+    image: '',
+    images: [],
+    technologies: ['Vectorization','Cosine Similarity','NLP','NumPy', 'Pandas', 'Scikit-learn', 'Google Colab', 'Python', 'Matplotlib',],
+    category: 'machine learning',
+    githubUrl: '',
+    featured: true,
+    completedAt: '2026-02-05',
+  },
+  {
+    id: '12',
+    title: 'Cats vs Dogs Classification',
+    description: 'A deep learning project that classifies images of cats and dogs',
+    longDescription: 'This project implements a binary image classifier to distinguish between cats and dogs using Transfer Learning with the MobileNetV2 architecture. By leveraging a pre-trained network on ImageNet and adding a custom classification head',
+    image: '',
+    images: [],
+    technologies: ['CNN','MobileNetV2','Python', 'TensorFlow', 'Keras', 'Google Colab', 'NumPy', 'Pandas', 'Matplotlib',],
+    category: 'deep learning',
+    githubUrl: '',
+    featured: true,
+    completedAt: '2026-02-05',
+  },
 ];
 
 export const skills: Skill[] = [
@@ -135,31 +200,48 @@ export const skills: Skill[] = [
   // Database
   { id: '11', name: 'MongoDB', level: 85, category: 'database', icon: 'mongodb' },
   { id: '12', name: 'MySQL', level: 80, category: 'database', icon: 'mysql' },
-  
+
+  // Computer Vision
+  { id: '13', name: 'Ultralytics YOLOv8', level: 80, category: 'computer vision', icon: 'ultralytics' },
+  { id: '14', name: 'EasyOCR', level: 80, category: 'computer vision', icon: 'easyocr' },
+  { id: '15', name: 'OpenCV (cv2)', level: 80, category: 'computer vision', icon: 'opencv' },
+  { id: '16', name: 'Google Colab', level: 80, category: 'computer vision', icon: 'googlecolab' },  
+  { id: '17', name: 'Python', level: 80, category: 'computer vision', icon: 'python' }, 
+
+   // Machine Learning
+   { id: '18', name: 'Scikit-learn', level: 90, category: 'machine learning', icon: 'scikit-learn' },
+   { id: '19', name: 'XGBoost', level: 85, category: 'machine learning', icon: 'xgboost' },
+   { id: '42', name: 'LightGBM', level: 80, category: 'machine learning', icon: 'algorithm' },
+   { id: '43', name: 'CatBoost', level: 80, category: 'machine learning', icon: 'algorithm' },
+   { id: '20', name: 'Linear Regression', level: 95, category: 'machine learning', icon: 'algorithm' },
+   { id: '21', name: 'Logistic Regression', level: 95, category: 'machine learning', icon: 'algorithm' },
+   { id: '22', name: 'SVM', level: 85, category: 'machine learning', icon: 'algorithm' },
+   { id: '23', name: 'Naive Bayes', level: 85, category: 'machine learning', icon: 'algorithm' },
+   { id: '38', name: 'Random Forest', level: 90, category: 'machine learning', icon: 'algorithm' },
+
+   // Deep Learning
+   { id: '24', name: 'TensorFlow', level: 85, category: 'deep learning', icon: 'tensorflow' },
+   { id: '25', name: 'PyTorch', level: 85, category: 'deep learning', icon: 'pytorch' },
+   { id: '26', name: 'Keras', level: 85, category: 'deep learning', icon: 'keras' },
+   { id: '27', name: 'TensorFlow.js', level: 80, category: 'deep learning', icon: 'tensorflowjs' },
+   { id: '39', name: 'CNN', level: 90, category: 'deep learning', icon: 'neural-network' },
+   { id: '40', name: 'RNN', level: 85, category: 'deep learning', icon: 'neural-network' },
+   { id: '41', name: 'Transformers', level: 80, category: 'deep learning', icon: 'neural-network' },
+
+   // Data Science
+   { id: '35', name: 'Pandas', level: 85, category: 'data science', icon: 'pandas' },
+   { id: '36', name: 'NumPy', level: 85, category: 'data science', icon: 'numpy' },
+   { id: '37', name: 'Matplotlib', level: 80, category: 'data science', icon: 'matplotlib' },  
+
   // Tools
-  { id: '13', name: 'Git', level: 90, category: 'tools', icon: 'git' },
-  { id: '14', name: 'GitHub', level: 90, category: 'tools', icon: 'github' },
-  { id: '15', name: 'VSCode', level: 95, category: 'tools', icon: 'vscode' },
-  { id: '16', name: 'Vercel', level: 80, category: 'tools', icon: 'vercel' },
-  { id: '17', name: 'Postman', level: 80, category: 'tools', icon: 'postman' },
-  
-  // Design
-  { id: '18', name: 'Figma', level: 70, category: 'design', icon: 'figma' },
-  { id: '19', name: 'Canva', level: 80, category: 'design', icon: 'canva' }
+  { id: '28', name: 'Git', level: 90, category: 'tools', icon: 'git' },
+  { id: '29', name: 'GitHub', level: 90, category: 'tools', icon: 'github' },
+  { id: '30', name: 'VSCode', level: 95, category: 'tools', icon: 'vscode' },
+  { id: '31', name: 'Vercel', level: 80, category: 'tools', icon: 'vercel' },
+  { id: '32', name: 'Postman', level: 80, category: 'tools', icon: 'postman' },
 ];
 
-export const experiences: Experience[] = [
-  {
-    id: '1',
-    company: 'Rafenthic',
-    position: 'Web Developer Intern',
-    duration: 'June 2024 - July 2024',
-    description: [
-      'Gained hands-on experience in web development, working on real-world projects.'
-    ],
-    technologies: ['HTML', 'CSS', 'JavaScript', 'React']
-  }
-];
+
 
 export const education: Education[] = [
   {

@@ -8,7 +8,7 @@ const About: React.FC = () => {
   const { ref, controls } = useScrollAnimation();
 
   const stats = [
-    { icon: Code, label: 'Projects Completed', value: '5+', color: 'from-violet-500 to-purple-600' },
+    { icon: Code, label: 'Projects Completed', value: '12+', color: 'from-violet-500 to-purple-600' },
     { icon: Award, label: 'Technologies', value: '15+', color: 'from-cyan-500 to-blue-600' },
     { icon: Rocket, label: 'Academic Experience', value: '6+ Months', color: 'from-pink-500 to-rose-600' },
     { icon: Zap, label: 'Commitment', value: '100%', color: 'from-amber-500 to-orange-600' }

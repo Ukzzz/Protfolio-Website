@@ -22,6 +22,38 @@ const skillCategories = [
     description: 'Server-side technologies and APIs',
   },
   {
+    id: 'deep learning',
+    label: 'Deep Learning',
+    icon: Database,
+    color: 'from-cyan-500 to-blue-600',
+    glowColor: 'rgba(6, 182, 212, 0.3)',
+    description: 'Neural networks and deep learning architectures',
+  },
+  {
+    id: 'machine learning',
+    label: 'Machine Learning',
+    icon: Database,
+    color: 'from-cyan-500 to-blue-600',
+    glowColor: 'rgba(6, 182, 212, 0.3)',
+    description: 'Predictive modeling and statistical algorithms',
+  },
+    {
+    id: 'computer vision',
+    label: 'Computer Vision',
+    icon: Database,
+    color: 'from-cyan-500 to-blue-600',
+    glowColor: 'rgba(6, 182, 212, 0.3)',
+    description: 'Image processing and visual recognition',
+  },
+  {
+    id: 'data science',
+    label: 'Data Science',
+    icon: Database, // You might want to import a different icon if available, e.g., BarChart or PieChart from lucide-react
+    color: 'from-amber-500 to-orange-600',
+    glowColor: 'rgba(245, 158, 11, 0.3)',
+    description: 'Data analysis and visualization libraries',
+  },
+  {
     id: 'tools',
     label: 'Dev Tools',
     icon: Wrench,
@@ -29,14 +61,7 @@ const skillCategories = [
     glowColor: 'rgba(16, 185, 129, 0.3)',
     description: 'Version control and development workflow',
   },
-  {
-    id: 'design',
-    label: 'Design',
-    icon: Brush,
-    color: 'from-pink-500 to-rose-600',
-    glowColor: 'rgba(236, 72, 153, 0.3)',
-    description: 'User experience and visual design',
-  },
+
 ];
 
 const Skills: React.FC = () => {

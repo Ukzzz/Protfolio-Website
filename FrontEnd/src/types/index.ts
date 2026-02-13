@@ -6,18 +6,18 @@ export interface Project {
   image: string;
   images: string[];
   technologies: string[];
-  category: 'frontend' | 'fullstack' | 'mobile' | 'backend' | 'design';
+  category: 'frontend' | 'fullstack' | 'mobile' | 'backend' | 'design' | 'computer vision' | 'machine learning' | 'deep learning';
   demoUrl?: string;
   githubUrl?: string;
   featured: boolean;
-  completedAt: string;
+  completedAt: string;  
 }
 
 export interface Skill {
   id: string;
   name: string;
   level: number; // 1-100
-  category: 'frontend' | 'backend' | 'database' | 'tools' | 'design';
+  category: 'frontend' | 'backend' | 'database' | 'tools' | 'computer vision' | 'machine learning' | 'deep learning' | 'data science';
   icon: string;
 }
 
@@ -65,4 +65,4 @@ export interface ThemeContextType {
   toggleTheme: () => void;
 }
 
-export type FilterCategory = 'all' | 'frontend' | 'fullstack' | 'mobile' | 'backend' | 'design';
+export type FilterCategory = 'all' | 'frontend' | 'fullstack' | 'mobile' | 'backend' | 'design' | 'computer vision' | 'machine learning' | 'deep learning';

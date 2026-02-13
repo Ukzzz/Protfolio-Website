@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion, Variants } from 'framer-motion';
 import { Download, Briefcase, GraduationCap, Calendar, MapPin } from 'lucide-react';
-import { experiences, education, personalInfo } from '../data/portfolio';
+import { education, personalInfo } from '../data/portfolio';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const Resume: React.FC = () => {
@@ -85,88 +85,8 @@ const Resume: React.FC = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-            {/* Experience Section */}
-            <motion.div variants={itemVariants}>
-              <div className="flex items-center gap-4 mb-10">
-                <div 
-                  className="p-4 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600"
-                  style={{
-                    boxShadow: '0 10px 40px -10px rgba(6, 182, 212, 0.4)'
-                  }}
-                >
-                  <Briefcase className="text-white" size={28} />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-white">Experience</h3>
-                  <p className="text-slate-400 text-sm">Professional background</p>
-                </div>
-              </div>
-
-              <div className="relative pl-8">
-                {/* Timeline line */}
-                <div 
-                  className="absolute left-[11px] top-2 bottom-2 w-[2px] rounded-full"
-                  style={{
-                    background: 'linear-gradient(180deg, rgba(6, 182, 212, 0.5) 0%, rgba(6, 182, 212, 0.1) 100%)'
-                  }}
-                />
-                
-                <div className="space-y-8">
-                  {experiences.map((exp, index) => (
-                    <motion.div 
-                      key={exp.id} 
-                      className="relative"
-                      initial={{ opacity: 0, x: -30 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.2 }}
-                    >
-                      {/* Timeline dot */}
-                      <div 
-                        className="absolute -left-[21px] top-2 w-6 h-6 rounded-full flex items-center justify-center"
-                        style={{
-                          background: 'linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%)',
-                          boxShadow: '0 0 20px rgba(6, 182, 212, 0.5)'
-                        }}
-                      >
-                        <div className="w-2 h-2 bg-white rounded-full" />
-                      </div>
-                      
-                      <motion.div 
-                        className="ml-4 p-6 rounded-2xl transition-all duration-300"
-                        style={{
-                          background: 'rgba(255, 255, 255, 0.02)',
-                          border: '1px solid rgba(255, 255, 255, 0.05)'
-                        }}
-                        whileHover={{ 
-                          backgroundColor: 'rgba(6, 182, 212, 0.05)',
-                          borderColor: 'rgba(6, 182, 212, 0.2)'
-                        }}
-                      >
-                        <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-3">
-                          <span className="font-bold text-lg text-white">{exp.position}</span>
-                          <span className="text-cyan-400 font-semibold">@ {exp.company}</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm text-slate-500 mb-4">
-                          <Calendar size={14} />
-                          {exp.duration}
-                        </div>
-                        <ul className="space-y-2">
-                          {exp.description.map((desc, i) => (
-                            <li key={i} className="text-slate-400 flex items-start gap-2">
-                              <span className="text-cyan-400 mt-1.5">•</span>
-                              {desc}
-                            </li>
-                          ))}
-                        </ul>
-                      </motion.div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-
+          <div className="max-w-4xl mx-auto">
+            
             {/* Education Section */}
             <motion.div variants={itemVariants}>
               <div className="flex items-center gap-4 mb-10">
