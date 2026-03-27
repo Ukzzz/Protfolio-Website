@@ -180,6 +180,19 @@ export const projects: Project[] = [
     featured: true,
     completedAt: '2026-02-05',
   },
+  {
+    id: '13',
+    title: 'FinTech MERN Stack Application',
+    description: 'A secure, full-stack financial management platform built for tracking expenses, managing user authentication, and generating comprehensive financial reports.',
+    longDescription: 'This FinTech application is a comprehensive, full-stack financial management platform built using the MERN (MongoDB, Express, React, Node.js) stack, designed to provide users with a secure and intuitive way to manage their personal or business finances. At its core, the system features a robust backend that handles secure user authentication through JWT and Bcrypt, coupled with a dynamic React frontend that delivers a seamless user experience. Users can easily track their expenses through full CRUD operations, visualize spending trends using interactive Recharts-driven dashboards, and manage financial documents by uploading vendor invoices via Multer. Furthermore, the application includes professional reporting capabilities, allowing for the direct export of aggregated financial data into XLSX and PDF formats, all while maintaining a high-quality visual aesthetic with Tailwind CSS and Framer Motion animations.',
+    image: '',
+    images: [],
+    technologies: ['React','Tailwind CSS','Recharts', 'Node.js', 'Express', 'MongoDB', 'JWT', 'Multer', 'Lucide React',],
+    category: 'fullstack',
+    githubUrl: 'https://github.com/Ukzzz/FinTech.git',
+    featured: true,
+    completedAt: '2026-03-26',
+  },
 ];
 
 export const skills: Skill[] = [
